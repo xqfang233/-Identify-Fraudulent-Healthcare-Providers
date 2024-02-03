@@ -1,0 +1,35 @@
+cloudpickle==3.0.0
+colorama==0.4.6
+contourpy==1.2.0
+cycler==0.12.1
+fonttools==4.47.2
+imbalanced-learn==0.12.0
+imblearn==0.0
+importlib-resources==6.1.1
+joblib @ file:///C:/b/abs_1anqjntpan/croot/joblib_1685113317150/work
+kiwisolver==1.4.5
+lightgbm==4.3.0
+llvmlite==0.42.0
+matplotlib==3.8.2
+mkl-fft @ file:///C:/b/abs_19i1y8ykas/croot/mkl_fft_1695058226480/work
+mkl-random @ file:///C:/b/abs_edwkj1_o69/croot/mkl_random_1695059866750/work
+mkl-service==2.4.0
+numba==0.59.0
+numpy @ file:///C:/b/abs_16b2j7ad8n/croot/numpy_and_numpy_base_1704311752418/work/dist/numpy-1.26.3-cp39-cp39-win_amd64.whl#sha256=02e606e23ca31bb00a40d147fd1ce4dd7d241395346a4196592d5abe54a333bc
+packaging==23.2
+pandas==2.2.0
+pillow==10.2.0
+pyparsing==3.1.1
+python-dateutil==2.8.2
+pytz==2024.1
+scikit-learn @ file:///C:/b/abs_38k7ridbgr/croot/scikit-learn_1684954723009/work
+scipy==1.11.4
+seaborn==0.13.2
+shap==0.44.1
+six==1.16.0
+slicer==0.0.7
+threadpoolctl @ file:///Users/ktietz/demo/mc3/conda-bld/threadpoolctl_1629802263681/work
+tqdm==4.66.1
+tzdata==2023.4
+xgboost==2.0.3
+zipp==3.17.0
