@@ -26,13 +26,14 @@ def predict():
                                   Ot_12Months_PartACov]
 
         prediction=model.predict([dp])
-        predict_prob = model.predict_proba([dp])
-        res=round(prediction[0],2)
+        pred_prob = model.predict_proba([dp])
+        # pred_class = model.classes_
+        res=prediction[0]
 
-        if res=="0":
-            return render_template('index.html',prediction_texts="This is not a fraudulent provider. The probability of being non-fraudulent is {}, the probaility of being fraudulent is {}.".format(predict_prob[:,0],predict_prob[:,1]))
-        elif res=="1":
-            return render_template('index.html',prediction_text="You caught a fraudulent provider!!! The probability of being non-fraudulent is {}, the probaility of being fraudulent is {}.".format(predict_prob[:,0],predict_prob[:,1]))
+        if res==0:
+            return render_template('index.html',prediction_text="This is not a fraudulent provider. The probability of being non-fraudulent is {}, the probaility of being fraudulent is {}.".format(pred_prob[:,0],pred_prob[:,1]))
+        elif res==1:
+            return render_template('index.html',prediction_text="You caught a fraudulent provider!!! The probability of being non-fraudulent is {}, the probaility of being fraudulent is {}.".format(pred_prob[:,0],pred_prob[:,1]))
     else:
         return render_template('index.html')
 
