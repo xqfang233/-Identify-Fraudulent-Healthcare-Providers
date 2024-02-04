@@ -1,0 +1,35 @@
+swagger: "2.0"
+
+info:
+  title: "Fraud detector"
+  description: "API that accepts healthcare provider features and determine if its fraudulent."
+  version: "1.0"
+
+host: "dark-passage-413222.appspot.com"
+
+securityDefinitions:
+  api_key:
+    type: apiKey
+    name: "X-API-KEY"  # Example header name for the API key
+    in: header
+
+paths:
+  /:
+    get:
+      summary: "Home Page"
+      description: "Land on home page"
+      operationId: "getHomePage"
+      responses:
+        '200':
+          description: "Success"
+
+  /predict:
+    post:
+      summary: "Predict Fraud"
+      description: "Get feature inputs and predict"
+      operationId: "predictFraud"
+      responses:
+        '200':
+          description: "Success"
+      security:
+        - api_key: []
