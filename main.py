@@ -1,53 +1,44 @@
 from flask import Flask, render_template, request
-import requests
 import pickle
-import numpy as np
-import sklearn
-from sklearn.preprocessing import StandardScaler
+
 app = Flask(__name__)
-model = pickle.load(open('xgboost_model.pkl', 'rb'))
+
+
+model = predict_fraud()
 @app.route('/',methods=['GET'])
 def Home():
     return render_template('index.html')
 
 
-standard_to = StandardScaler()
 @app.route("/predict", methods=['POST'])
-def predict():
-    Fuel_Type_Diesel=0
+def recieve_data():
     if request.method == 'POST':
-        Year = int(request.form['Year'])
-        Present_Price=float(request.form['Present_Price'])
-        Kms_Driven=int(request.form['Kms_Driven'])
-        Kms_Driven2=np.log(Kms_Driven)
-        Owner=int(request.form['Owner'])
-        Fuel_Type_Petrol=request.form['Fuel_Type_Petrol']
-        if(Fuel_Type_Petrol=='Petrol'):
-                Fuel_Type_Petrol=1
-                Fuel_Type_Diesel=0
-        else:
-            Fuel_Type_Petrol=0
-            Fuel_Type_Diesel=1
-        Year=2020-Year
-        Seller_Type_Individual=request.form['Seller_Type_Individual']
-        if(Seller_Type_Individual=='Individual'):
-            Seller_Type_Individual=1
-        else:
-            Seller_Type_Individual=0	
-        Transmission_Mannual=request.form['Transmission_Mannual']
-        if(Transmission_Mannual=='Mannual'):
-            Transmission_Mannual=1
-        else:
-            Transmission_Mannual=0
-        prediction=model.predict([[Present_Price,Kms_Driven2,Owner,Year,Fuel_Type_Diesel,Fuel_Type_Petrol,Seller_Type_Individual,Transmission_Mannual]])
-        output=round(prediction[0],2)
-        if output<0:
-            return render_template('index.html',prediction_texts="Sorry you cannot sell this car")
-        else:
-            return render_template('index.html',prediction_text="You Can Sell The Car at {}".format(output))
-    else:
-        return render_template('index.html')
+        In_ClaimID = float(request.form['In_ClaimID'])
+        In_BeneID=float(request.form['In_BeneID'])
+        In_claim_duration=float(request.form['In_claim_duration'])
+        In_DeductibleAmtPaid=float(request.form['In_DeductibleAmtPaid'])
+        Ot_12Months_PartBCov=float(request.form['Ot_12Months_PartBCov'])
+        In_InscClaimAmtReimbursed=float(request.form['In_InscClaimAmtReimbursed'])
+        Ot_ClmDiagnosisNum = float(request.form['Ot_ClmDiagnosisNum'])
+        Ot_12Months_PartACov = float(request.form['Ot_12Months_PartACov'])
 
-if __name__=="__main__":
-    app.run(debug=True)
-
+        dp = [In_ClaimID, In_BeneID, In_claim_duration, In_DeductibleAmtPaid,
+                                  Ot_12Months_PartBCov, In_InscClaimAmtReimbursed, Ot_ClmDiagnosisNum,
+                                  Ot_12Months_PartACov]
+        return dp
+        #
+        # prediction=model.predict([dp])
+        # pred_prob = model.predict_proba([dp])
+        # # pred_class = model.classes_
+        # res=prediction[0]
+    #
+    #     if res==0:
+    #         return render_template('index.html',prediction_text="This is not a fraudulent provider. The probability of being non-fraudulent is {}, the probaility of being fraudulent is {}.".format(pred_prob[:,0],pred_prob[:,1]))
+    #     elif res==1:
+    #         return render_template('index.html',prediction_text="You caught a fraudulent provider!!! The probability of being non-fraudulent is {}, the probaility of being fraudulent is {}.".format(pred_prob[:,0],pred_prob[:,1]))
+    # else:
+    #     return render_template('index.html')
+#
+# if __name__=="__main__":
+#     app.run(debug=True)
+#
