@@ -59,7 +59,7 @@ The Data tables merging procedure:
 ![table_merging drawio](https://github.com/xqfang233/Identify-Fraudulent-Healthcare-Providers/assets/81652429/9f58e50b-79f8-4011-ab62-8e6f3a5124dc)
 
 
-Based on the abnormalities discussed above, we created the following features for subsequent prediction. The detailed data analysis process is in *analytics and prediction.ipynb*.
+Based on the abnormalities discussed above, I created the following features for subsequent prediction. The detailed data analysis process is in *analytics and prediction.ipynb*.
 1. Ot_BeneID: the number of unique out-patient beneficiaries this provider submitted claims for 
 2. Ot_ClaimID: the number of unique claims this provider submitted for out-patients
 3. Ot_InscClaimAmtReimbursed: the average amount the insurance company has paid back to either the healthcare provider or the patient for the medical service
@@ -147,7 +147,8 @@ Accuracy: 0.93419740777667
 + KNN had the worst accuracy performance by having the highest number of false-positives
 
 ## Evaluating Success: Model Results & Implications
-Since our data is highly imbalanced (legitimate:fraudulent = 9:1), accuracy may not be the most proper metric to measure the model predicting performance. Therefore, besides of accuracy, we also apply ROC-AUC curve and Precision-Recall curve as performance measurements.
+Given the significant imbalance in our data, with a ratio of 9:1 between legitimate and fraudulent instances, accuracy alone might not fully capture our model's predictive performance. 
+Therefore, I've supplemented accuracy with the ROC-AUC curve and the Precision-Recall curve to provide a more comprehensive evaluation of our model's effectiveness.
 
 ### ROC-AUC curve
 The ROC (Receiver Operating Characteristic) curve is a graphical plot that illustrates the diagnostic ability of a binary classifier system by plotting the true positive rate (TPR) against the false positive rate (FPR) at various threshold settings. The AUC (Area Under the Curve) represents the measure of the ability of the classifier to distinguish between classes. 
@@ -167,11 +168,11 @@ Due to the imbalanced nature of our dataset, Precision-Recall and ROC-AUC curves
 ## Deployment & On-demand Prediction
 
 ### Predictive contributions for each feature
-Since we have 36 features it's bothersome to enter them all at once for on-demand point prediction, we conducted a SHAP analysis for the XGBoost model to see which features are more important toward making predictions.
+Given the challenge of inputting all 36 features for on-demand predictions, I utilized SHAP analysis on the XGBoost model to identify which features play a more significant role in driving predictions.
 
 ![shap-xgboost](https://github.com/xqfang233/Identify-Fraudulent-Healthcare-Providers/assets/81652429/bbeb2ca8-2fe1-4a63-9d88-16af4a4ace24)
 
-The features are ordered descendingly based on their predictive contributions, and we pick the first 8 features to retrain an XGBoost model for on-demand analysis:
+The features are ordered descendingly based on their predictive contributions, and I pick the first 8 features to retrain an XGBoost model for on-demand analysis:
 
 ![xgb_t](https://github.com/xqfang233/Identify-Fraudulent-Healthcare-Providers/assets/81652429/3a493773-4443-4f6f-ad8a-79108fdda083)
 
